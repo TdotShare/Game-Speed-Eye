@@ -89,7 +89,7 @@ function Table(props) {
             }else{
                 //LOST
                 setNumberArr(Array(rowMax).fill(Array(columnMax).fill(0)))
-                props.setScoreGame(0)
+                //props.setScoreGame(0)
                 props.setTimerGame(0)
                 props.setComplete(false)
                 props.setPlay(false)

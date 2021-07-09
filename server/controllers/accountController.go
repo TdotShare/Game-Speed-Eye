@@ -93,7 +93,9 @@ func GetScoresPlayer(c *fiber.Ctx) error {
 
 	findOptions := options.Find()
 	findOptions.SetSort(map[string]int{"userScore": -1})
-	findOptions.SetLimit(5)
+	findOptions.SetLimit(6)
+
+	total, _ := accountCollection.CountDocuments(ctx, bson.M{})
 
 	cursor, err := accountCollection.Find(ctx, bson.M{}, findOptions)
 
@@ -114,7 +116,8 @@ func GetScoresPlayer(c *fiber.Ctx) error {
 	}
 
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
-		"data": account,
+		"data":  account,
+		"count": total,
 	})
 
 }

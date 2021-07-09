@@ -5,6 +5,7 @@ import AnimatedNumber from "animated-number-react";
 import swal from 'sweetalert';
 
 import { Link } from "react-router-dom";
+import { API } from "./../../../config/api"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBook, faListOl, faPlay } from '@fortawesome/free-solid-svg-icons'
@@ -55,7 +56,7 @@ function Index(props) {
             return
         }
 
-        if(userName.length > 7){
+        if (userName.length > 7) {
             swal("การบันทึกคะแนนไม่สำเร็จ", "กรุณาอย่าตั้งชื่อเกิน 7 ตัว", "warning");
             return
         }
@@ -64,11 +65,33 @@ function Index(props) {
 
         console.log(data)
 
+
+
+        fetch(`${API}/api/accounts/create`, {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then(response => response.json())
+            .then(res => {
+                console.log('Success');
+                console.log(res)
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+
         swal("บันทึกคะแนนเรียบร้อย", "ขอบคุณที่ ร่วมทดสอบและเล่นเกมของเรา :') ", "success");
 
         props.setModelScore(false)
 
     }
+
+    const openManual = () => {
+        window.open('https://drive.google.com/drive/folders/1Nskdm7oEl3apWYqHZchEQ-eSTOKMsGuU?usp=sharing');
+      }
 
 
     const startGame = () => {
@@ -135,7 +158,7 @@ function Index(props) {
 
 
             <Row >
-                <Col><Button variant="secondary" block><FontAwesomeIcon icon={faBook} /> การเล่น - ติดตั้ง</Button></Col>
+                <Col><Button variant="secondary" onClick={openManual} block><FontAwesomeIcon icon={faBook} /> การเล่น - ติดตั้ง</Button></Col>
                 <Col> <Link to="/scoreList"><Button variant="secondary" onClick={() => actionStopGame()} block  ><FontAwesomeIcon icon={faListOl} /> อันดับทั้งหมด</Button></Link></Col>
             </Row>
 

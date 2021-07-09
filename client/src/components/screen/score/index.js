@@ -7,20 +7,33 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUndo } from '@fortawesome/free-solid-svg-icons'
 
+import { API } from "./../../../config/api"
+
 
 function Index() {
 
-    const [userList, setUserList] = React.useState([
-        { rank: 1, name: "test01", score: 10 },
-        { rank: 2, name: "test02", score: 12 },
-        { rank: 3, name: "test03", score: 16 },
-        { rank: 4, name: "test04", score: 17 },
-        { rank: 5, name: "test05", score: 18 },
-        { rank: 6, name: "test06", score: 20 },
-    ])
+
+    const [userList, setUserList] = React.useState([])
+    const [userCounts, setUserCounts] = React.useState(0)
 
     const actionGetScore = () => {
-        console.log("actionGetScore !")
+
+        fetch(`${API}/api/accounts/all`, {
+            method: 'GET', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+            .then(response => response.json())
+            .then(res => {
+                //console.log(res)
+                setUserList(res.data ? res.data : [])
+                setUserCounts(res.count)
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+
     }
 
     React.useEffect(() => {
@@ -29,17 +42,18 @@ function Index() {
 
     const scoreList = userList.map((el, index) => (
         <div key={index} style={{ padding: '1%' }}>
-            <Card 
-            className={`shadow-sm rounded`}
-            bg={index === 0 ? "secondary" : "light" } 
-            key={index} 
-            text={index === 0 ?  'white' : 'dark' }
+            <Card
+                className={`shadow-sm rounded`}
+                bg={index === 0 ? "secondary" : "light"}
+                key={index}
+                text={index === 0 ? 'white' : 'dark'}
             >
                 <Card.Body>
                     <Row>
-                        <Col>{el.rank}</Col>
-                        <Col>{el.name}</Col>
-                        <Col>{el.score}</Col>
+                        <Col>{index + 1}</Col>
+                        <Col>{el.userName}</Col>
+                        <Col>{el.userScore}</Col>
+                        <Col>{el.userCreateAt}</Col>
                     </Row>
                 </Card.Body>
             </Card>
@@ -66,15 +80,18 @@ function Index() {
                         <Col>อันดับ</Col>
                         <Col>ชื่อผู้เล่น</Col>
                         <Col>คะแนน</Col>
+                        <Col>เวลาที่บันทึก</Col>
                     </Row>
                 </Card.Body>
             </Card>
 
             {scoreList}
-            
-            <hr/>
 
-            <h4>จากทั้งหมด 100 คน</h4>
+            <hr />
+
+            <h4>จากทั้งหมด {userCounts} คน</h4>
+
+            <div style={{paddingTop : "2%"}}></div>
 
         </Container>
     )
