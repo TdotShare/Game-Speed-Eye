@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  client:
+    container_name: react
+    build: ./client
+    ports:
+      - '3000:80'
+
+  server:
+    build: ./server
+    ports:
+      - "5000:5000"
+    environment: 
+      DB_SERVICE: database
+
+  database:
+    image: 'mongo:latest'
+    container_name: mongo
+    restart: always
+    command: mongod --port 27017
+    ports:
+      - 27017:27017

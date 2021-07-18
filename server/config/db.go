@@ -31,6 +31,7 @@ func ConnectDB() {
 	client, err := mongo.NewClient(options.Client().ApplyURI(os.Getenv("MONGO_URI")))
 	if err != nil {
 		log.Fatal(err)
+		log.Fatal("Error NewClient")
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -39,11 +40,13 @@ func ConnectDB() {
 	err = client.Connect(ctx)
 	if err != nil {
 		log.Fatal(err)
+		log.Fatal("Error client.Connect")
 	}
 
 	err = client.Ping(ctx, readpref.Primary())
 	if err != nil {
 		log.Fatal(err)
+		log.Fatal("Error client.Ping")
 	}
 
 	fmt.Println("Database connected!")
