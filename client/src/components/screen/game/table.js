@@ -123,7 +123,6 @@ function Table(props) {
 
 const mapDispatchToProps = dispatch => {
     return {
-        // dispatching plain actions
         setNumberKey: (data) => dispatch({ type: 'setNumberKey', payload: data }),
         setComplete: (data) => dispatch({ type: 'setComplete', payload: data }),
         setPlay: (data) => dispatch({ type: 'setPlay', payload: data }),

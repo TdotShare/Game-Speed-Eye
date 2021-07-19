@@ -36,7 +36,9 @@ function Index() {
     }
 
     React.useEffect(() => {
-        actionGetScore()
+        setTimeout(() => {
+            actionGetScore()
+        }, 5000);
     }, [])
 
     const scoreList = userList.map((el, index) => (

@@ -40,7 +40,7 @@ function Index(props) {
                 props.setTimerGame(timerGame - 1)
             }, 1200);
 
-            console.log(timerGame)
+            //console.log(timerGame)
 
             return () => clearInterval(interval);
         }
@@ -63,7 +63,7 @@ function Index(props) {
 
         let data = { "userName": userName, "userScore": scoreGame }
 
-        console.log(data)
+        //console.log(data)
 
 
 
@@ -76,8 +76,8 @@ function Index(props) {
         })
             .then(response => response.json())
             .then(res => {
-                console.log('Success');
-                console.log(res)
+                //console.log('Success');
+                //console.log(res)
             })
             .catch((error) => {
                 console.error('Error:', error);
