@@ -68,7 +68,7 @@ function Index(props) {
 
 
         fetch(`${API}/api/accounts/create`, {
-            method: 'POST', // or 'PUT'
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },

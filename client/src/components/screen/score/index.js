@@ -19,14 +19,13 @@ function Index() {
     const actionGetScore = () => {
 
         fetch(`${API}/api/accounts/all`, {
-            method: 'GET', // or 'PUT'
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
             }
         })
             .then(response => response.json())
             .then(res => {
-                //console.log(res)
                 setUserList(res.data ? res.data : [])
                 setUserCounts(res.count)
             })

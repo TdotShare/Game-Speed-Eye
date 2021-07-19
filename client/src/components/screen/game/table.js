@@ -29,7 +29,6 @@ function Table(props) {
             //setNumberArr(Array(rowMax).fill(Array(columnMax).fill(0)))
         }
 
-     // eslint-disable-next-line
     })
 
     const genNumber = () => {
