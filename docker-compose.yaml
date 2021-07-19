@@ -5,12 +5,12 @@ services:
     container_name: react
     build: ./client
     ports:
-      - '127.0.0.1:3000:80'
+      - '3000:80'
 
   server:
     build: ./server
     ports:
-      - "127.0.0.1:5000:5000"
+      - '5000:5000'
     environment: 
       DB_SERVICE: database
 
@@ -20,4 +20,4 @@ services:
     restart: always
     command: mongod --port 27017
     ports:
-      - 127.0.0.1:27017:27017
+      - '27017:27017'
