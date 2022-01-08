@@ -1,5 +1,5 @@
 # pull the base image
-FROM node:alpine as builder
+FROM node:14 as builder
 
 # set the working direction
 WORKDIR /app

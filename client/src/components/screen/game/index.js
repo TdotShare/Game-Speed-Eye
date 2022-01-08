@@ -77,7 +77,7 @@ function Index(props) {
             .then(response => response.json())
             .then(res => {
                 //console.log('Success');
-                //console.log(res)
+                console.log(res)
             })
             .catch((error) => {
                 console.error('Error:', error);
