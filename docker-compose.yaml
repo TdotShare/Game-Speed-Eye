@@ -6,6 +6,8 @@ services:
     build: ./client
     ports:
       - '3000:80'
+    environment:
+      SERVER_ENDPOINT: http://localhost:8080
 
   server:
     build: ./server
