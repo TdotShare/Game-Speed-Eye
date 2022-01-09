@@ -14,6 +14,9 @@ RUN npm install && npm run build
 
 # => Run container
 FROM nginx:1.21.5-alpine
+
+RUN sudo npx browserslist@latest --update-db
+
 COPY --from=build /app/build /usr/share/nginx/html/
 COPY --from=build /app/nginx.conf /etc/nginx/conf.d/default.conf
 
