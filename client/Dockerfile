@@ -1,5 +1,5 @@
 # pull the base image
-FROM node:14 as builder
+FROM node:14 as build
 
 # set the working direction
 WORKDIR /app
@@ -13,8 +13,8 @@ RUN npm install && npm run build
 
 
 # => Run container
-FROM nginx:alpine
-COPY --from=builder /app/build /usr/share/nginx/html/
+FROM nginx:1.21.5-alpine
+COPY --from=build /app/build /usr/share/nginx/html/
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
