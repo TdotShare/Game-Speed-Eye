@@ -7,6 +7,7 @@ WORKDIR /app
 # add app
 COPY . .
  
+RUN npm i caniuse-lite browserslist
 RUN npm install && npm run build
 
 
